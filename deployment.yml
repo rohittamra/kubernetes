@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-	name: simple-app-deployment
+	name: ngnix-deployment
 spec:
 	repicas: 2
 	selector:
 		matchLabels:
-			app: simple-app
+			app: ngnix
 	template:
 		metadata:
 			labels:
-				app: simple-app
+				app: ngnix
 		spec:
 			containers:
-			- name: simple-app
-			  image: victorelvis/simple-app
+			- name: ngnix
+			  image: ngnix:1.16
 			  resources:
 			  	limits:
 				  memory: "256Mi"
 				  cpu: "500m"
 			  ports:
-			  - containerPort: 3000
+			  - containerPort: 8080
