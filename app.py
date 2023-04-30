@@ -5,9 +5,9 @@ import os
 app = Flask(__name__)
 
 @app.route('/hello')
-def hello():
+def hello1234():
     print("Hello World")
-    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname())
+    return "<p>Hello, World!</p>"
 
 if __name__ == "main":
     app.run(hostname='0.0.0.0',port=80)
