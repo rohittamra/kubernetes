@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-app-rohit
-        image: mysampleimage
+        image: acrworkflow1682844018568:mysampleimage
         ports:
         - containerPort: 80
