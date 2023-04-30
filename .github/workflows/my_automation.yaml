@@ -3,6 +3,7 @@ name: my_automation
     push:
         branches:
             - main
+            - rohit
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: test
