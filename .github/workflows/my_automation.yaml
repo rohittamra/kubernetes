@@ -3,17 +3,16 @@ name: my_automation
     push:
         branches:
             - main
-            - rohit
+            - rohit2
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: test
     AZURE_CONTAINER_REGISTRY: acrworkflow1682844018568
     CLUSTER_NAME: clustername
     CLUSTER_RESOURCE_GROUP: test
-    CONTAINER_NAME: image-workflow-1682844018568
+    CONTAINER_NAME: mysampleimage
     DEPLOYMENT_MANIFEST_PATH: |
         ./deployment.yml
-        ./service.yml
 jobs:
     buildImage:
         permissions:
