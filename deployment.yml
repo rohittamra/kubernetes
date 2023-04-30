@@ -1,23 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-	name: ngnix-deployment
+metaData: 
+	name: myapp-deployment
 spec:
-	repicas: 2
-	selector:
-		matchLabels:
-			app: ngnix
+	replicas: 2
+	selector: 
+		metaLabels:
+			app: myapp
 	template:
-		metadata:
+		metaData:
 			labels:
-				app: ngnix
+				app: myapp
 		spec:
 			containers:
-			- name: ngnix
-			  image: ngnix:1.16
-			  resources:
-			  	limits:
-				  memory: "256Mi"
-				  cpu: "500m"
-			  ports:
-			  - containerPort: 8080
+				- name: myapp
+					image: myapprohit
+					resources:
+						limits:
+							memory: "256Mi"
+							cpu: "500m"
+					ports:
+						containerPort: 80
+						targetPort: 8080
