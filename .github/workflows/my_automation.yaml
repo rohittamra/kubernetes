@@ -13,6 +13,7 @@ env:
     CONTAINER_NAME: mysampleimage
     DEPLOYMENT_MANIFEST_PATH: |
         ./deployment.yml
+        ./service.yml
 jobs:
     buildImage:
         permissions:
