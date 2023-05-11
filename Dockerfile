@@ -1,5 +1,6 @@
-FROM python:3.11.3-slim-buster
-
-EXPOSE 80
-
-CMD ['python','app.py']
+FROM python:3.9-slim-buster
+RUN pip install flask
+WORKDIR /app
+COPY app.py .
+EXPOSE 5000
+ENTRYPOINT ["python", "app.py"]
