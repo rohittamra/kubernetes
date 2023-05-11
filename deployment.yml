@@ -1,23 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
-  labels:
-    app: app
+  name: flask-app-deploy
 spec:
-  strategy: 
-    type: Recreate
+  replicas: 2
   selector:
     matchLabels:
-      app: my-app
+      app: flask-app
   template:
     metadata:
       labels:
-        app: my-app
+        app: flask-app
     spec:
       containers:
-      - name: my-app-rohit
-        image: acrworkflow1682844018568.azurecr.io/mysampleimage:latest
-        imagePullPolicy: IfNotPresent
+      - name: flask-app-container
+        image: kunchalavikram/gitops-demo-app:18
         ports:
-        - containerPort: 80
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 5000
+    nodePort: 32000
+  selector:
+    app: flask-app
