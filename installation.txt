@@ -27,3 +27,16 @@ sudo usermod -aG docker $USER
 
 sudo usermod -aG docker jenkins
 newgrp docker
+
+Jenkins GUI:
+PLugins: dashboard view, docker pipeline
+newItem: pipeline: GitHub hook trigger for GITScm polling
+
+Creditinals: system: 
+
+1.Create github token : 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
+put it in above -> iD as github
+2. Create docker hub credentials and also put
+
+Change your settings.json pipleine name with your piplerine name, url
+

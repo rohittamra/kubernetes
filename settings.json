@@ -1,0 +1,17 @@
+{
+    "jenkins-runner.jobs": {
+        "my-test-pipeline": {
+            "runWith": "jenkins-master",
+            "name": "my-test-pipeline",
+            "isDefault": true
+        }
+    },
+    "jenkins-runner.hostConfigs": {
+        "jenkins-master": {
+            "url": "http://172.162.241.38:8080",
+            "user": "admin",
+            "password": "admin",
+            "userCrumbIssuer": true
+        }
+    }
+}
