@@ -6,6 +6,7 @@ ssh -i ~/Downloads/minikube_key.pem azureuser@172.162.240.52
 
 Jenkins:
 sudo apt update
+sudo apt-get install python3-pip
 sudo apt install default-jdk
 wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
@@ -40,3 +41,4 @@ put it in above -> iD as github
 
 Change your settings.json pipleine name with your piplerine name, url
 
+shift + alt+ P --> jenkins runner (install extension if not present)
