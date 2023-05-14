@@ -1,0 +1,29 @@
+End to end setup of Minikube,docker, argocd and Jenkins
+
+
+chmod 600 ~/Downloads/minikube_key.pem 
+ssh -i ~/Downloads/minikube_key.pem azureuser@172.162.240.52
+
+Jenkins:
+sudo apt update
+sudo apt install default-jdk
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt-get install daemon net-tools
+wget https://pkg.jenkins.io/debian-stable/binary/jenkins_2.387.3_all.deb
+sudo dpkg -i jenkins_2.387.3_all.deb 
+sudo systemctl enable jenkins
+sudo systemctl status jenkins
+
+Very IMP: sudo ufw allow 8080
+
+http://<public ip>:8080
+
+Docker : 
+sudo apt  install docker.io
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+sudo usermod -aG docker jenkins
+newgrp docker
