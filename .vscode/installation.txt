@@ -30,8 +30,8 @@ sudo usermod -aG docker jenkins
 newgrp docker
 
 Jenkins GUI:
-PLugins: dashboard view, docker pipeline
-newItem: pipeline: GitHub hook trigger for GITScm polling
+PLugins: dashboard view, docker pipeline, Generic Webhook Trigger Plugin
+newItem: pipeline: GitHub hook trigger for GITScm polling, 
 
 Creditinals: system: 
 
@@ -42,3 +42,21 @@ put it in above -> iD as github
 Change your settings.json pipleine name with your piplerine name, url
 
 shift + alt+ P --> jenkins runner (install extension if not present)
+
+
+
+Minikube:
+    1  sudo snap install kubectl --classic
+    2  sudo apt-get update
+    3  sudo apt-get install virtualbox
+    4  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    5  sudo apt-get update
+    6  sudo apt-get install virtualbox
+    7  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    8  sudo install minikube-linux-amd64 /usr/local/bin/minikube
+    9  minikube start --vm-driver=virtualbox
+   10  minikube status
+   11  kubectl
+   12  kubectl get nodes
+   13  kubectl get nodes -o wide
+   14  kubectl get po,svc
