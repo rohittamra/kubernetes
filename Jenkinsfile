@@ -61,7 +61,7 @@ pipeline {
                     git add deployment.yml
                     git commit -m 'Updated the deployment file' """
                     withCredentials([usernamePassword(credentialsId: 'Github', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                        sh "git push http://$user:$pass@github.com/rohittamra/kubernetes-deployment.git dev"
+                        sh "git push https://$user:$pass@github.com/rohittamra/kubernetes-deployment.git dev"
                     }
                 }
             }
