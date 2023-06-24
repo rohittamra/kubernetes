@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metaData:
+  name: appRohitConfig
+data:
+  config.cfg: |
+    MSG="Welcome to Flask"
