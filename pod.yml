@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metaData:
+  name: pod-name
+  label:
+    namespace: mynamespace
+    selector: rohit-pods
+spec:
+  containers:
+   -  name: flask-app-container
+      image: rohit17061997/my_image:latest
+      volumeMounts:
+      - name: config-vol
+        mountPath: /config
+  volumes:
+    - name: config-vol
+      configMap:
+        name: appRohitConfig
