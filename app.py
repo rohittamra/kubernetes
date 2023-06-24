@@ -16,8 +16,13 @@ def health():
     )
 
 @app.route("/")
-def home():
+def basic():
     return "Hello from DevOps Made Easy"
-   
+
+@app.route("/configmap")
+def configmap():
+    app.config.from_pyfile('/config/config.cfg')
+    return app.config['MSG']
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int("5000"), debug=True)
