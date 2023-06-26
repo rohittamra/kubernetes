@@ -12,7 +12,14 @@ spec:
       volumeMounts:
       - name: config-vol
         mountPath: /config
+      - name: secret-vol
+        mountPath: /config2
+        readOnly: true
+
   volumes:
     - name: config-vol
       configMap:
         name: appRohitConfig
+    - name: secret-vol
+      secret: 
+        secretName: mysecrets
