@@ -4,4 +4,4 @@ WORKDIR /app
 COPY app.py .
 COPY config.cfg /config/config.cfg
 EXPOSE 5000
-ENTRYPOINT ["python", "app.py"]
+CMD ["python", "app.py"]

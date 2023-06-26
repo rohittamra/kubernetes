@@ -1,10 +1,7 @@
 apiVersion: v1
 kind: Pod
-metaData:
+metadata:
   name: pod-name
-  label:
-    namespace: mynamespace
-    selector: rohit-pods
 spec:
   containers:
    -  name: flask-app-container
@@ -19,7 +16,7 @@ spec:
   volumes:
     - name: config-vol
       configMap:
-        name: appRohitConfig
+        name: app-rohit-config
     - name: secret-vol
       secret: 
         secretName: mysecrets
