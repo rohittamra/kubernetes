@@ -1,0 +1,108 @@
+#everything will be converted in template in one file
+helm template <any_release_name> -f <values_file_location_till_.yml> <which_folder_you_are_working_on> --debug > <any_file>
+helm template test -f ./app-template/values.yaml ./app-template/ --debug
+
+# Run tests to examine a chart and identify possible issues:
+helm lint ./app-template/
+
+helm list                       # Lists all of the releases for a specified namespace, uses current namespace context if namespace not specified
+helm list --all                 # Show all releases without any filter applied, can use -a
+helm list --all-namespaces      # List releases across all namespaces, we can use -A
+helm -l key1=value1,key2=value2 # Selector (label query) to filter on, supports '=', '==', and '!='
+helm list --date                # Sort by release date
+helm list --deployed            # Show deployed releases. If no other is specified, this will be automatically enabled
+helm list --pending             # Show pending releases
+helm list --failed              # Show failed releases
+helm list --uninstalled         # Show uninstalled releases (if 'helm uninstall --keep-history' was used)
+helm list --superseded          # Show superseded releases
+helm list -o yaml               # Prints the output in the specified format. Allowed values: table, json, yaml (default table)
+helm status <release>           # This command shows the status of a named release.
+helm status <release> --revision <number>   # if set, display the status of the named release with revision
+helm history <release>          # Historical revisions for a given release.
+helm env                        # Env prints out all the environment information in use by Helm.
+
+
+#used for any file to run or not -> this goes on very top of any page
+{{- if .Values.app.enabled -}}
+{{- end }}
+-------------------------------
+
+
+#used for any variable to keep on changing values if this is not present -> this goes anywhere wherever variable needs to be decided
+{{- if  "version>=1.0.0"  .Capabilities.KubeVersion.GitVersion }}
+{{- else if "version>=2.0.0"  .Capabilities.KubeVersion.GitVersion -}}
+{{- else -}}
+{{- end }}
+
+#---------------------------------
+#check with
+
+#---------------------------------
+#check range
+
+#---------------------------------
+# if you write a function or values 
+
+#Sometimes you want to create some reusable parts in your chart, whether they're blocks or template partials. And often, it's cleaner to keep these in their own files.
+#In the templates/ directory, any file that begins with an underscore(_) is not expected to output a Kubernetes manifest file. So by convention, helper templates and partials are placed in a _helpers.tpl file.
+#_helpers.tpl will be used by whole helm chart
+#any name here i am using "app-template.name"
+{{- define "app-template.name" -}}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+#to use this function in some other place like deployment.yaml..
+# . maeans to be called here
+{{- include "app.template.name" . | nindent 4 }}
+#---------------------------------
+
+#toYaml
+#if you have to use a whole block  in yaml to be copied to a resource
+    limit:
+      {{- toYaml .Values.app.resources.compute | nindent 4 }}
+
+#---------------------------------
+#sub commands used  after pipe operator
+trunc <number> 
+trimSuffix "-"
+nindent <number>
+quote -> Wraps the previous content into double quotes. Don't Quote Integers(This remark does not apply to env variables values which are expected to be string, even if they represent integers)
+lower -> lower case the whole previous content          example-> value: {{ include "mytpl" . | lower | quote }}
+
+
+#---------------------------------
+#Image pull secrets are essentially a combination of registry, username, and password. You may need them in an application you are deploying, but to create them requires running base64 a couple of times. We can write a helper template to compose the Docker configuration file for use as the Secret's payload. Here is an example:
+
+#First, assume that the credentials are defined in the values.yaml file like so:
+
+imageCredentials:
+  registry: quay.io
+  username: someone
+  password: sillyness
+  email: someone@host.com
+
+#We then define our helper template as follows:
+
+{{- define "imagePullSecret" }}
+{{- with .Values.imageCredentials }}
+{{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"%s\",\"auth\":\"%s\"}}}" .registry .username .password .email (printf "%s:%s" .username .password | b64enc) | b64enc }}
+{{- end }}
+{{- end }}
+
+#Finally, we use the helper template in a larger template to create the Secret manifest:
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: myregistrykey
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: {{ template "imagePullSecret" . }}
+
+
+#---------------------------------
+#instructs Helm to skip deleting this resource when a helm operation 
+#This can lead to problems if using helm install --replace on a release that has already been uninstalled, but has kept resources.
+metadata:
+  annotations:
+    "helm.sh/resource-policy": keep
