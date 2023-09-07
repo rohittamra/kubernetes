@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: rohit-practise
+  name: {{ .Values.app.namespaceName }}

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-app-container
-        image: rohit17061997/my_image:10
+        image: {{- include "app-template.imagedetails" . }}
         ports:
         - containerPort: 5000
       restartPolicy: Always

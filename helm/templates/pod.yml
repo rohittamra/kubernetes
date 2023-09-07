@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
    -  name: flask-app-container
-      image: rohit17061997/my_image:latest
+      image: {{ .Values.app.imageName }}/{{ .Values.app.repoName }}:latest
       volumeMounts:
       - name: config-vol
         mountPath: /config

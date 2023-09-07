@@ -1,0 +1,12 @@
+app:
+  namespaceName: rohit-practise
+  repoName: rohit17061997
+  imageName: my_image
+  ports: 
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+
+serviceenabled: true
+
